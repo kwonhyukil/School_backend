@@ -1,0 +1,29 @@
+
+services: # Key
+  web: # Key
+    image: nginx # 이미지는 한 번 설정하면 변하지 않는다.
+    ports:
+      - "80:80" # - : 리스트의 각 항목 ( 배열 요소 )
+    volumes:
+      - ./src:/usr/share/nginx/html
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf # nginx 설정 파일
+    depends_on:
+      - app
+    # Value
+
+  app:
+    image: php:8.2-fpm
+    volumes:
+      - ./src:/var/www/html
+      - ./docker/php/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  db_data:
