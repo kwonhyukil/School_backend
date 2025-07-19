@@ -21,4 +21,22 @@ try {
   // SQL 쿼리 실행
   $query = "select * from student";
   $result = $db_conn->query($query);
+
+  // 결과 출력 (연관 배열 방식)
+  while ($row = $result->fetch_assoc()) {
+    echo "이름: " . htmlspecialchars($row['name']) . "<br>";
+    echo "나이: " . htmlspecialchars($row['age']) . "<br>";
+    echo "<hr>";
+  }
+} catch (Exception $ex) {
+  // 내부 서버 로그에 에러 기록
+  error_log("[DB ERROR] " . $ex->getMessage(), 3, "/tmp/php_custom_error.log");
+
+  // 사용자에게는 일반적인 오류 메시지만 출력 (보안 고려)
+  echo "데이터베이스 처리 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.";
+} finally {
+  // DB 연결종료
+  if ($db_conn instanceof mysqli) {
+    $db_conn->close(); // 안전하게 연결 종료
+  }
 }
