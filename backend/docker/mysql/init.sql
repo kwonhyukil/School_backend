@@ -15,7 +15,6 @@ CREATE TABLE IF NOT EXISTS student (
     birth DATE                                    -- 생년월일
 );
 
-
 -- -- 데이터베이스 생성
 -- CREATE DATABASE IF NOT EXISTS myapp CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
