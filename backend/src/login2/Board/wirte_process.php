@@ -46,7 +46,7 @@ try {
 
   $sql = "
     INSERT INTO posts (name, password, title, content, created_at)
-    VALUE ('$name','$password','$title','$content', NOW())";
+    VALUE ('$name','$password_hashed','$title','$content', NOW())";
 
   if (!$db_conn->query($sql)) {
     throw new Exception('DB 등록 실패');

@@ -26,7 +26,7 @@ $name_row = trim($_POST['name'] ?? '');
 
 
 if ($username_row === '' || $password_row === '' || $name_row === '') {
-  $_SESSION['error'] = "모든 필드를 입ㄹ력하세요.";
+  $_SESSION['error'] = "모든 필드를 입력하세요.";
   header("Location: register.php");
   exit;
 }
