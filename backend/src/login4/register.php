@@ -25,8 +25,10 @@ session_start();
   if (isset($_SESSION['error'])) {
     echo "<p style='color: red'>" . htmlspecialchars($_SESSION['error']) . "</p>";
     unset($_SESSION['error']);
-  } else {
+  } 
+  if (isset($_SESSION['success'])) {
     echo "<p style='color: green'>" . htmlspecialchars($_SESSION['success']) . "</p>";
+    unset($_SESSION['error']);
   }
 ?>
 <form action="register_process.php" method="post">
@@ -44,6 +46,6 @@ session_start();
     </li>
   </ul>
 </form>
-<button><a href="login.php">취소</a></button>
+<button><a href="index.php">취소</a></button>
 </body>
 </html>
