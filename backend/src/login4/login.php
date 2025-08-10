@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if (isset($_SESSION['login'])) {
+  header("Location: welcome.php");
+  exit;
+}
 ?>
 
 
@@ -44,7 +48,14 @@ session_start();
         <input type="password" id="password" name="password" required>
       </li>
       <li>
+        <input type="checkbox" name="remember" id="remember">
+        <label for="remember">자동 로그인</label>
+      </li>
+      <li>
         <button type="submit" name="login">로그인</button>
+      </li>
+      <li>
+        <button><a href="index.php">뒤로가기</a></button>
       </li>
     </ul>
   </Form>

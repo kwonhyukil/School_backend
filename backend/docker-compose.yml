@@ -32,6 +32,7 @@ services:
       - ./docker/mysql/login.sql:/docker-entrypoint-initdb.d/login.sql
       - ./docker/mysql/posts.sql:/docker-entrypoint-initdb.d/posts.sql
       - ./docker/mysql/user.sql:/docker-entrypoint-initdb.d/user.sql
+      - ./docker/mysql/post.sql:/docker-entrypoint-initdb.d/post.sql
 
 volumes:
   db_data:

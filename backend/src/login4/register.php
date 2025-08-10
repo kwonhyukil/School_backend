@@ -44,8 +44,10 @@ session_start();
     <li>
       <button type="submit">회원가입</button>
     </li>
+    <li>
+      <button><a href="index.php">취소</a></button>
+    </li>
   </ul>
 </form>
-<button><a href="index.php">취소</a></button>
 </body>
 </html>

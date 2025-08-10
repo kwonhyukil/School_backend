@@ -3,14 +3,14 @@ use gsc;
 CREATE TABLE IF NOT EXISTS posts (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
-  name VARCHAR(100) NOT NULL,
+  user_id VARCHAR(100) NOT NULL,
   password VARCHAR(255) NOT NULL,
   content TEXT NOT NULL,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO posts (title, name, password, content)
+INSERT INTO posts (title, user_id, password, content)
 VALUES
     ('테스트 제목 1', '홍길동', '$2y$10$USCrgB8FMRcAyVnz8dXgFuew5FWOKG.anoSXjrVNxqeOX7U/fMBu2', '내용 1입니다.'),
     ('테스트 제목 2', '김영희', '$2y$10$USCrgB8FMRcAyVnz8dXgFuew5FWOKG.anoSXjrVNxqeOX7U/fMBu2', '내용 2입니다.'),

@@ -50,7 +50,7 @@ if ($result && $result->num_rows > 0) {
 # (INSERT INTO user (user_id, pasaword_hash))
 } else {
   $password_hash = password_hash($password, PASSWORD_DEFAULT);
-  $sql = "INSERT INTO user(user_id,password) VALUES ('$user_id', '$password')";
+  $sql = "INSERT INTO user(user_id,password) VALUES ('$user_id', '$password_hash')";
   $result = $db_conn->query($sql);
   $_SESSION['success'] = "회원가입이 완료되었습니다. 로그인 후 이용하세요!";
   $db_conn->close();
