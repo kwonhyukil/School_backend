@@ -33,6 +33,9 @@ services:
       - ./docker/mysql/posts.sql:/docker-entrypoint-initdb.d/posts.sql
       - ./docker/mysql/user.sql:/docker-entrypoint-initdb.d/user.sql
       - ./docker/mysql/post.sql:/docker-entrypoint-initdb.d/post.sql
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_0900_ai_ci
 
 volumes:
   db_data:
