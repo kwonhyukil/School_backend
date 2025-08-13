@@ -25,7 +25,7 @@ if ($db_conn->connect_error) {
   exit;
 }
 
-# 
+# 전달 받은 값 검증
 if($title === '' || $user_id === '' || $content === '') {
   $_SESSION['error'] = "모든 내용을 입력하세요";
   header("Location: write.php");
@@ -50,6 +50,7 @@ if (!word_num_check(strlen($content), 1, 1000)) {
   header("Location: write.php");
   exit;
 }
+
 
 if ($post) {
   $sql = "update post set title='$title', user_id='$user_id', content='$content', updated_at=NOW() WHERE id='$post'";

@@ -17,6 +17,9 @@ if ($db_conn->connect_error){
   $_SESSION['error'] = "DB연결 실패";
   exit;
 }
+
+# 페이지네이션
+# 1. 현재 페이지 받아오기
 ?>
 
 
@@ -33,7 +36,7 @@ if ($db_conn->connect_error){
   2. 각 항목에 맞는 위치에 배치하기
   3. DB에서 post 테이블 가져오는 sql문 작성 ( 오름차순 )
   4. SELECT id, title, user_id, created_at FROM post ORDER BY id ASC;
-  4. 각 제목에 해당하는 항목에 해당하는 값 생성
+  5. 각 제목에 해당하는 항목에 해당하는 값 생성
 -->
 
 <h1>게시글 목록</h1>

@@ -2,7 +2,7 @@
 
 session_start();
 
-$user_id = isset($_SESSION['user_id']) ? htmlspecialchars($_SESSION['user_id']) : "게스트";
+
 if (!$_SESSION['login']) {
   header("Location: login.php");
   exit;
