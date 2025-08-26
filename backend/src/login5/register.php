@@ -15,7 +15,7 @@ require_once 'DB.php';
 <body>
 <h1>회원가입</h1>
 <!-- 
-session['error'] 가 있을 경우 ( isset ) 에러 메시지를 출력함.
+session["error"] 가 있을 경우 ( isset ) 에러 메시지를 출력함.
 
 
 회원가입 Form 작성

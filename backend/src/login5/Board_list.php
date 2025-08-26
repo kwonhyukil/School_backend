@@ -8,6 +8,8 @@
 # $sql = "SELECT * FROM poster ORDER BY DESC";
 # $result = mysqli_query($db_conn, $sql);
 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -20,11 +22,11 @@
 <h1>게시글 목록</h1>
 
 <!-- 
-1. 게시글 목록 출력
+1. 게시글 목록 출력 및 해당 게시글 상제보기 
 table
 $while($result->mysqli_fetch_array($result))
   echo id
-  echo 제목 title
+  echo 제목 title -> a태그 사용 (View.php?id=' ')
   echo 작성자 writer
   echo 내용 content
   echo 작성일자 created_at

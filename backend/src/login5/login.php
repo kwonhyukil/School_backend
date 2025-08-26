@@ -14,6 +14,5 @@ Form action="login.php" method="post"
 4. 로그인 버튼 생성하여 클릭시 form을 post 방식으로 login_process.php 에 전달한다.
 5. 뒤로가기 버튼 생성하여 클릭시 mainpage.php 로 이동
 -->
-
 </body>
 </html>

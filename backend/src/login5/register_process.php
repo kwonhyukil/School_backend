@@ -8,11 +8,11 @@
 #    1) $user_id = isset($_POST['user_id'])
 #    2) $name = isset($_POST['name'])
 #    3) $password =isset($_POST['password'])
+
 #    SQL 인젝션 방지
 #    $user_id = mysqli_real_escape_string($db_conn, $user_id)
 #    $name = mysqli_real_escape_string($db_conn, $name)
 #    $password = mysqli_real_escape_string($db_conn, $password)
-
 
 # 3. 전달된 데이터 ( $user_id, $name, $password ) 공백인지 확인하고 공백일 경우
 #    1) header("Location: register.php") 로 이동 exit;
@@ -30,6 +30,8 @@
 #    $result = mysqli_query($db_conn, $sql)
 
 # 6. $result ( query문 실행 값이 True or False )
-#    True = header("Location: login.php") 이동 후 회원가입 성공 메시지 출력 exit
-#    False = header("Location: register.php") 이동 후 에러메시지 출력 exit
+#    session['register'] = True
+#    header("Location: login.php") 이동 후 회원가입 성공 메시지 출력 exit
+#    session['register] = False
+#    header("Location: register.php") 이동 후 에러메시지 출력 exit
 ?>
