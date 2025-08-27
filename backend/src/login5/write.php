@@ -1,13 +1,24 @@
 <?php
+session_start();
 
+if ( !isset($_SESSION['login']) ){
+  $_SESSION['error'] = "작성 권한이 없습니다. 로그인 후 이용할 수 있습니다.";
+  header("Location: Board_list.php");
+  exit;
+}
 # 글 작성은 로그인을 한 사용자만 가능 
-# $SESSION['login'] = True 일 경우에 write.php 사용
+# $_SESSION['login'] = True 일 경우에 write.php 사용
 
-# $SESSION['login'] = False 일 경우에는 Board_list.php 로 이동
+# $_SESSION['login'] = False 일 경우에는 Board_list.php 로 이동
 
 # 글작성 시 작성자 항목에 현재 로그인 되어있는 사용자의 아이디 출력 
-# $writer = ($SESSION['user_id'])
+# $writer = ($_COOKIE['user_id'])
 
+if ( isset($_SESSION['title'])) {
+  $title = $_SESSION['title'];
+} else {
+  $title = '';
+}
 
 
 ?>
@@ -30,5 +41,29 @@ Form action = "write_process.php" method = "post" 방식으로 전달
 5. 취소 버튼 생성 -> Board_list.php 로 이동
 
 -->
+<?php
+if ( isset($_SESSION['error'])) {
+  echo htmlspecialchars($_SESSION['error']);
+  unset($_SESSION['error']);
+} 
+
+?>
+
+<form action="write_process.php" method="post">
+  <div>
+    <label for="title">제목: </label>
+    <input type="text" id="title" name="title"required>
+  </div>
+  <div>
+    <label for="writer">작성자: </label>
+    <input type="text" id="writer" name="writer" value="<?= $_COOKIE['user_id'] ?>">
+  </div>
+  <div>
+    <label for="content">내용: </label>
+    <textarea name="content" id="content" cols=30 rows=10></textarea>
+  </div>
+  <button type="submit">작성하기</button>
+  <button><a href="Board_list.php">뒤로가기</a></button>
+</form>
 </body>
 </html>

@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -14,5 +20,30 @@ Form action="login.php" method="post"
 4. 로그인 버튼 생성하여 클릭시 form을 post 방식으로 login_process.php 에 전달한다.
 5. 뒤로가기 버튼 생성하여 클릭시 mainpage.php 로 이동
 -->
+<h1>로그인</h1>
+
+<?php
+  if(isset($_SESSION['error'])) {
+    echo htmlspecialchars($_SESSION['error']);
+    unset($_SESSION['error']);
+  }
+?>
+<form action="login_process.php" method="post">
+  <div>
+    <label for="user_id">ID: </label>
+    <input type="text" id="user_id" name="user_id" required>
+  </div>
+  <div>
+    <label for="password">password: </label>
+    <input type="password" id="password" name="password" required>
+  </div>
+  <div>
+    <label for="remember-me">자동로그인</label>
+    <input type="checkbox" id="remember-me" name="remember-me">
+  </div>
+  <button type="submit">로그인</button>
+  <button><a href="mainpage.php">메인 페이지</a></button>
+</form>
+
 </body>
 </html>

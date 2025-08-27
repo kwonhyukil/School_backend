@@ -31,9 +31,8 @@ services:
       - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./docker/mysql/login.sql:/docker-entrypoint-initdb.d/login.sql
       - ./docker/mysql/posts.sql:/docker-entrypoint-initdb.d/posts.sql
-      - ./docker/mysql/user.sql:/docker-entrypoint-initdb.d/user.sql
       - ./docker/mysql/post.sql:/docker-entrypoint-initdb.d/post.sql
-      - ./docker/mysql/user.sql:/docker-entrypoint-initdb.d/user.sql
+      - ./docker/mysql/users.sql:/docker-entrypoint-initdb.d/users.sql
       - ./docker/mysql/poster.sql:/docker-entrypoint-initdb.d/poster.sql
     command:
       - --character-set-server=utf8mb4
