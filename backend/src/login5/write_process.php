@@ -1,6 +1,9 @@
 <?php
 # require_once 'DB.php'
 require_once 'DB.php';
+
+session_start();
+
 # DB 연결 정보 불러오고 연결 상태 확인 -> connect error 발생시 exit;
 if ($db_conn->connect_error) {
     $_SESSION['error'] = "데이터 연결실패";
@@ -19,6 +22,10 @@ if ($title === '' || $writer === '' || $content === ''){
     $_SESSION['error'] = "모든 내용을 입력하세욥";
     header("Location: write.php");
     exit;
+} else {
+    $_SESSION['title'] = $title;
+    $_SESSION['writer'] = $writer;
+    $_SESSION['content'] = $content;
 }
 $title = mysqli_real_escape_string($db_conn, $title);
 $writer = mysqli_real_escape_string($db_conn, $writer);
@@ -26,31 +33,27 @@ $content = mysqli_real_escape_string($db_conn, $content);
 
 # 전달 받은 ( $title, $writer, $content )의 글자 수 검증을 위한 함수 생성
 function word_num_check($a, $min, $max) {
-    if ( $a < $min || $a > $max){
-        return false;
+    if ( $a >= $min && $a <= $max){
+        return true;
     }
-    return true;
+    return false;
 }
 
 # 제목  ( title )    1자 이상 30자 이하   ( 함수 호출하여 반환값으로 True or False ) 
 # 작성자( writer )   1자 이상 20자 이하   ( 함수 호출하여 반환값으로 True or False )
 # 내용은( content )  1자 이상 1000자 이하 ( 함수 호출하여 반환값으로 True or False )
 # false 일 경우 에러 메시지 저장
-
 if (!word_num_check(strlen($title), 1, 30)){
-    $_SESSION['title'] = $title;
     $_SESSION['error'] = "제목의 글자 수를 확인하세요";
     header("Location: write.php");
     exit;
 }
 if (!word_num_check(strlen($writer), 1, 20)){
-    $_SESSION['writer'] = $writer;
     $_SESSION['error'] = "작성자의 글자 수를 확인하세요";
     header("Location: write.php");
     exit;
 }
 if (!word_num_check(strlen($content), 1, 1000)){
-    $_SESSION['content'] = $content;
     $_SESSION['error'] = "내용의 글자 수를 확인하세요";
     header("Location: write.php");
     exit;
@@ -59,6 +62,15 @@ if (!word_num_check(strlen($content), 1, 1000)){
 $sql = "INSERT INTO poster(title, writer, content) VALUES ('$title', '$writer', '$content')";
 $result = mysqli_query($db_conn, $sql);
 
+if ($result) {
+    $_SESSION['success'] = "게시글 등록 성공!";
+    header("Location: Board_list.php");
+    exit;
+} else {
+    $_SESSION['error'] = "게시글 등록 실패!";
+    header("Location: write.php");
+    exit;
+}
 # 글자 수 검증이 완료 후 DB에 저장 SQL 문 작성
 # $sql = "INSERT INTO poster VALUES (title, writer, content, created_at(NOW()))
 # $result = mysqli_query($db_conn, $sql)

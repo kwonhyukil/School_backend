@@ -29,18 +29,21 @@ Form action="login.php" method="post"
   }
 ?>
 <form action="login_process.php" method="post">
-  <div>
-    <label for="user_id">ID: </label>
-    <input type="text" id="user_id" name="user_id" required>
-  </div>
-  <div>
-    <label for="password">password: </label>
-    <input type="password" id="password" name="password" required>
-  </div>
-  <div>
-    <label for="remember-me">자동로그인</label>
-    <input type="checkbox" id="remember-me" name="remember-me">
-  </div>
+  <table border="1" cellpadding="10">
+    <tr>
+      <td><label for="user_id">ID </label></td>
+      <td><input type="text" id="user_id" name="user_id"></td>
+    </tr>
+    <tr>
+      <td><label for="password">PASSWORD</label> </td>
+      <td><input type="password" id="password" name="password"></td>
+    </tr>
+    <tr>
+      <td><label for="remember-me">자동로그인</label></td>
+      <td><input type="checkbox" id="remember-me" name="remember-me"></td>      
+    </tr>
+  </table>
+  <br>
   <button type="submit">로그인</button>
   <button><a href="mainpage.php">메인 페이지</a></button>
 </form>

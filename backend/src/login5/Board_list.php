@@ -4,18 +4,31 @@ session_start();
 require_once 'DB.php';
 # require_once 'DB.php';
 
-# $sql = "SELECT * FROM poster ORDER BY DESC";
-# $result = mysqli_query($db_conn, $sql);
-// if ( !isset($_SESSION['login'])){
-//   header("Location: mainpage.php");
-//   exit;
-// }
+if ($db_conn->connect_error) {
+  $_SESSION['error'] = "DB 연결 실패";
+  exit;
+}
+if ( !isset($_COOKIE['user_id'])){
+  header("Location: mainpage.php");
+  exit;
+}
 
 if ( isset($_COOKIE['login'])){
   $remember = "자동 로그인 ON";
 } else {
   $remember = "자동 로그인 OFF";
 }
+
+# $sql = "SELECT * FROM poster ORDER BY DESC";
+# $result = mysqli_query($db_conn, $sql);
+// if ( !isset($_SESSION['login'])){
+//   header("Location: mainpage.php");
+//   exit;
+// }
+$sql = "SELECT id, title, writer, created_at FROM poster ORDER BY id DESC";
+$result = mysqli_query($db_conn, $sql);
+
+
 
 ?>
 
@@ -47,8 +60,26 @@ $while($result->mysqli_fetch_array($result))
 2. 게시글 작성 버튼 생성 -> 클릭시 write.php 로 이동
 3. 로그아웃 -> 클릭시 logout.php 로 이동
 -->
-<a href="write.php">게시글 작성</a>
-<a href="logout.php">로그아웃</a>
+<table border="1" cellpadding="5">
+  <tr>
+    <td>번호</td>
+    <td>제목</td>
+    <td>작성자</td>
+    <td>작성일자</td>
+  </tr>
+<?php while($row = mysqli_fetch_assoc($result)){ ?>
+    <tr>
+      <td><?= $row['id']; ?></td>
+      <td><a href="view.php?id=<?= $row['id'] ?>"><?= $row['title']; ?></a></td>
+      <td><?= $row['writer']; ?></td>
+      <td><?= $row['created_at']; ?></td>
+    </tr>
+  <?php } ?>
+</table>
+
+<br>
+<button><a href="write.php">게시글 작성</a></button>
+<button><a href="logout.php">로그아웃</a></button>
 
 
 </body>

@@ -3,8 +3,16 @@
 require_once 'DB.php';
 
 # DB 연결 확인 connect error 발생시 에러메시지 출력 exit;
-
+if ($db_conn->connect_error) {
+    $_SESSION['error'] = "DB 연결 실패 !!";
+    exit;
+}
 # GET 방식으로 게시글 id 값 저장
+$id = $_GET['id'];
+
+$sql = "SELECT * FROM poster WHERE id='$id'";
+$result = mysqli_query($db_conn, $sql);
+$row = mysqli_fetch_assoc($result);
 
 # SQL 문 작성 -> 해당 게시글의 id 가 DB에 저장되어있는지 확인
 # True -> 해당 id에 해당하는 게시글 정보 가져옴
@@ -14,6 +22,7 @@ require_once 'DB.php';
 ?>
 
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -21,7 +30,6 @@ require_once 'DB.php';
     <title>게시글 상세보기</title>
 </head>
 <body>
-    <h1><?php #게시글 id ?> 상세보기</h1>
 <!-- 
     해당 id에 게시글 정보 출력
     제목 : Title
@@ -29,12 +37,32 @@ require_once 'DB.php';
     작성일자 : Created_at
     수정일자 : updated_at
     내용 : Content
-    
+     
     버튼 생성 ( 수정 버튼과 삭제 버튼은 Login 이 되어있고, 작성자과 게시글 작성자가 동일할 경우에만 표시 )
     목록 버튼 클릭 시 Board_list.php 로 이동
     수정 버튼 클릭 시 edit.php?id=' ' 로 이동
     삭제 버튼 클릭 시 delete.php?id=' ' 로 이동
 -->
+<h1><?= $row['id'] . "번 게시물" ?> 상세보기</h1>
+<div>
+    <table border="1" cellpadding="10">
+        <tr>
+            <td>제목</td>
+            <td><?= $row['title']; ?> </td>
+        </tr>
+        <tr>
+            <td>작성자</td>
+            <td><?= $row['writer']; ?> </td>
+        </tr>
+        <tr>
+            <td>내용</td>
+            <td style="padding: 100px"><pre><?= $row['content']; ?> </pre></td>
+        </tr>
+    </table>
+    <button><a href="edit.php?id=<?= $row['id']; ?>">수정</a></button>
+    <button><a href="delete.php?id=<?= $row['id']; ?>">삭제</a></button>
+    <button><a href="Board_list.php">목록</a></button>
+</div>
 
 </body>
 </html>

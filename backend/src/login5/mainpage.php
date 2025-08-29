@@ -6,6 +6,10 @@ if (isset($_SESSION['register'])){
 } else {
   $msg = "회원가입 후 이용 가능합니다.";
 }
+if (isset($_COOKIE['user_id'])){
+  header("Location: Board_list.php");
+  exit;
+}
 
 ?>
 

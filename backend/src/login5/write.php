@@ -14,10 +14,12 @@ if ( !isset($_SESSION['login']) ){
 # 글작성 시 작성자 항목에 현재 로그인 되어있는 사용자의 아이디 출력 
 # $writer = ($_COOKIE['user_id'])
 
-if ( isset($_SESSION['title'])) {
+if ( isset($_SESSION['title']) && isset($_SESSION['content'])) {
   $title = $_SESSION['title'];
+  $content = $_SESSION['content'];
 } else {
   $title = '';
+  $content = '';
 }
 
 
@@ -42,6 +44,7 @@ Form action = "write_process.php" method = "post" 방식으로 전달
 
 -->
 <?php
+
 if ( isset($_SESSION['error'])) {
   echo htmlspecialchars($_SESSION['error']);
   unset($_SESSION['error']);
@@ -50,20 +53,23 @@ if ( isset($_SESSION['error'])) {
 ?>
 
 <form action="write_process.php" method="post">
-  <div>
-    <label for="title">제목: </label>
-    <input type="text" id="title" name="title"required>
-  </div>
-  <div>
-    <label for="writer">작성자: </label>
-    <input type="text" id="writer" name="writer" value="<?= $_COOKIE['user_id'] ?>">
-  </div>
-  <div>
-    <label for="content">내용: </label>
-    <textarea name="content" id="content" cols=30 rows=10></textarea>
-  </div>
+  <table border="1" cellpadding="10">
+    <tr>
+      <td>제목</td>
+      <td><input type="text" id="title" name="title"></td>
+    </tr>
+    <tr>
+      <td>작성자</td>
+      <td><input type="text" id="writer" name="writer" value="<?= $_COOKIE['user_id'] ?>"></td>
+    </tr>
+    <tr>
+      <td>내용</td>
+      <td><textarea name="content" id="content" cols="50" rows="15"></textarea></td>
+    </tr>
+  </table>
+  <br>
   <button type="submit">작성하기</button>
-  <button><a href="Board_list.php">뒤로가기</a></button>
-</form>
+</form>                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+<button><a href="Board_list.php">뒤로가기</a></button>
 </body>
 </html>
